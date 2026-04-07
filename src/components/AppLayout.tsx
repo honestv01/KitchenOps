@@ -54,7 +54,7 @@ const AppLayout: React.FC = () => {
 
       {/* Main Content */}
       <main
-        className={`transition-all duration-300 min-h-screen ${
+        className={`transition-all duration-300 min-h-screen w-full min-w-0 ${
           sidebarOpen && !isMobile ? 'ml-56' : isMobile ? 'ml-0' : 'ml-16'
         }`}
       >
@@ -82,8 +82,8 @@ const AppLayout: React.FC = () => {
           </div>
         </header>
 
-        {/* Content Area */}
-        <div className="p-4 sm:p-6 max-w-7xl">
+        {/* Content Area — full width of main (sidebar offset already applied) */}
+        <div className="p-4 sm:p-6 w-full max-w-none box-border">
           {renderView()}
         </div>
       </main>
