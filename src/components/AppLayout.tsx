@@ -39,8 +39,16 @@ const AppLayout: React.FC = () => {
     }
   };
 
+  /* Fixed sidebar + margin-left: avoid w-full (100%) + ml-* — that overflows the viewport. */
+  const mainLayoutClass =
+    isMobile
+      ? 'ml-0 w-full'
+      : sidebarOpen
+        ? 'ml-56 w-[calc(100%-14rem)]'
+        : 'ml-16 w-[calc(100%-4rem)]';
+
   return (
-    <div className="min-h-screen bg-[#F8F8F8]">
+    <div className="min-h-screen bg-[#F8F8F8] overflow-x-hidden">
       {/* Sidebar */}
       {(!isMobile || sidebarOpen) && <Sidebar />}
 
@@ -53,11 +61,7 @@ const AppLayout: React.FC = () => {
       )}
 
       {/* Main Content */}
-      <main
-        className={`transition-all duration-300 min-h-screen w-full min-w-0 ${
-          sidebarOpen && !isMobile ? 'ml-56' : isMobile ? 'ml-0' : 'ml-16'
-        }`}
-      >
+      <main className={`transition-all duration-300 min-h-screen min-w-0 box-border ${mainLayoutClass}`}>
         {/* Top bar */}
         <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-gray-100 px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
